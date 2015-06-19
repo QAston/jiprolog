@@ -23,7 +23,7 @@ package com.ugos.jiprolog.engine;
 //import java.io.Serializable;
 import java.util.Hashtable;
 
-final class Atom extends PrologObject //implements Serializable
+public final class Atom extends PrologObject //implements Serializable
 {
 
 	final static long serialVersionUID = 300000001L;

@@ -25,7 +25,7 @@ import java.util.Hashtable;
 
 import com.ugos.util.StringBuilderEx;
 
-final class Variable extends PrologObject//Serializable
+public final class Variable extends PrologObject//Serializable
 {
     final static long serialVersionUID = 300000008L;
 

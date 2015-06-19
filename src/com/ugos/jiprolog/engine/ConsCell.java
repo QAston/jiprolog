@@ -23,7 +23,7 @@ package com.ugos.jiprolog.engine;
 //import java.io.Serializable;
 import java.util.Hashtable;
 
-class ConsCell extends PrologObject //implements Serializable
+public class ConsCell extends PrologObject //implements Serializable
 {
     final static long serialVersionUID = 300000003L;
 
