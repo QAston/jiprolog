@@ -23,7 +23,7 @@ package com.ugos.jiprolog.engine;
 import java.io.*;
 import java.util.*;
 
-final class PrologParser
+public final class PrologParser
 {
     private static final int STATE_NONE           = 0;
     private static final int STATE_ROUND_BRACKET  = 1;
@@ -148,7 +148,7 @@ final class PrologParser
 //        }
 //    }
 
-    PrologParser(final ParserReader reader, final OperatorManager opManager, final JIPEngine engine, final String strFileName)
+    public PrologParser(final ParserReader reader, final OperatorManager opManager, final JIPEngine engine, final String strFileName)
     {
         m_lnReader = reader;//new LineNumberReader(reader);
         m_tokenizer = new PrologTokenizer(m_lnReader, strFileName);
@@ -157,7 +157,7 @@ final class PrologParser
         m_strFileName = strFileName;
     }
 
-    PrologObject parseNext() throws JIPSyntaxErrorException
+    public PrologObject parseNext() throws JIPSyntaxErrorException
     {
 //      System.out.println("parseNext");
         m_varTable.clear();
@@ -311,7 +311,7 @@ final class PrologParser
                         tok.m_strToken = tok.m_strToken.substring(1, tok.m_strToken.length() - 1);
                     	if(tok.m_strToken.length() == 1 && CASE_CHARS.indexOf(tok.m_strToken.charAt(0)) > -1)
                     	{
-                    	    // il quoted atom è un carattere presente nel case e va trattato come atomo
+                    	    // il quoted atom ï¿½ un carattere presente nel case e va trattato come atomo
                     	    termStack.push(Atom.createAtom(tok.m_strToken));
                     	    break;
                     	}
@@ -359,8 +359,8 @@ final class PrologParser
                                     termStack.push(funct);
 
                                 }
-                                // termStack.size() == 1  indica che lastObj è il primo termine letto e quindi anche se l'operatore è infix va trattato come atomo
-                                // bWhiteSpace indica il termine precedente è uno white-space
+                                // termStack.size() == 1  indica che lastObj ï¿½ il primo termine letto e quindi anche se l'operatore ï¿½ infix va trattato come atomo
+                                // bWhiteSpace indica il termine precedente ï¿½ uno white-space
                                 else if(lastObj instanceof Operator && !bWhiteSpace)
                                 {
                                     if(termStack.size() == 1 || ((Operator)lastObj).getInfix() == null)
@@ -383,7 +383,7 @@ final class PrologParser
                                     }
                                     else
                                     {
-                                        // last obj è infisso e c'è un antecedente
+                                        // last obj ï¿½ infisso e c'ï¿½ un antecedente
                                         termStack.pop();
                                         Object lastLastObj = termStack.peek();
                                         termStack.push(lastObj);
@@ -571,9 +571,9 @@ final class PrologParser
                                         termStack.push(new ConsCell((ConsCell)lastObj, null));
                                     }
 
-                                    // risolve quello che c'è a destra
+                                    // risolve quello che c'ï¿½ a destra
                                     PrologObject objRight = translateTerm(STATE_PIPE, lnReader);
-                                    // risolve quello che c'è a sinistra
+                                    // risolve quello che c'ï¿½ a sinistra
                                     PrologObject objleft = resolveStack(termStack);
 
                                     if((objleft instanceof ConsCell) && !(objleft instanceof Functor) && !(objleft instanceof List))
@@ -649,7 +649,7 @@ final class PrologParser
                                     {
                                         termStack.push(curOp.getPrefix());
                                     }
-                                    else  // è considerato come atomo
+                                    else  // ï¿½ considerato come atomo
                                     {
                                         termStack.push(Atom.createAtom(tok.m_strToken));
                                     }
@@ -805,8 +805,8 @@ final class PrologParser
                                                     // mi trovo in arglist con ,
                                                     if(lastOp.getName().equals(","))
                                                     {
-                                                        //curOp è atomo ,
-                                                        //lastOp è operator
+                                                        //curOp ï¿½ atomo ,
+                                                        //lastOp ï¿½ operator
                                                     	if(quoted)
                                                     	{
                                                           Atom atom1 = Atom.createAtom(curOp.getName());
@@ -818,8 +818,8 @@ final class PrologParser
                                                     }
                                                     else
                                                     {
-                                                        //curOp è operator ,
-                                                        //lastOp è atom
+                                                        //curOp ï¿½ operator ,
+                                                        //lastOp ï¿½ atom
                                                         // versione precedente funzionante tranne che per
                                                         // write_canonical((a - -, b)).
                                                         // -(a, ','(-, b))
@@ -841,8 +841,8 @@ final class PrologParser
                                                             ((curOp.getPrecedence() == lastOp.getPrecedence()) && !lastOp.isNonAssoc() &&
                                                             (curOp.isLeftAssoc() || !lastOp.isRightAssoc())))
                                                         {
-                                                            //curOp è atomo
-                                                            //lastOp è operatore
+                                                            //curOp ï¿½ atomo
+                                                            //lastOp ï¿½ operatore
                                                             termStack.pop();
                                                             termStack.push(Atom.createAtom(curOp.getName()));
                                                             PrologObject funct = resolveOperator(termStack, lastOp);
@@ -851,8 +851,8 @@ final class PrologParser
                                                         }
                                                         else
                                                         {
-                                                            //curOp è operator
-                                                            //lastOp è atom
+                                                            //curOp ï¿½ operator
+                                                            //lastOp ï¿½ atom
                                                             Atom atom1 = Atom.createAtom(lastOp.getName());
                                                             termStack.pop();
                                                             termStack.push(atom1);
@@ -883,15 +883,15 @@ final class PrologParser
                                                         curOp = curOp.getPrefix();
 
 //                                                        System.out.println("LasOP infix " + lastOp.m_strName + "CurOp Prefix " + curOp.m_strName);
-                                                        // se curOp è prefisso va avanti
+                                                        // se curOp ï¿½ prefisso va avanti
                                                         termStack.push(lastOp);
                                                         termStack.push(curOp);
                                                         lastObj = null;
                                                     }
                                                     else if(lastLastObj instanceof PrologObject)
                                                     {
-                                                        // lastOp è un infix valido
-                                                        // curOp è un atomo
+                                                        // lastOp ï¿½ un infix valido
+                                                        // curOp ï¿½ un atomo
                                                         termStack.push(lastOp);
                                                         termStack.push(Atom.createAtom(curOp.getName()));
                                                         lastObj = null;
@@ -903,9 +903,9 @@ final class PrologParser
                                                         {
                                                             lastLastOp = lastLastOp.getPrefix();
 
-                                                            // lastOp è un infix valido
-                                                            // lastLastObj è un atomo
-                                                            // curOp è un atomo
+                                                            // lastOp ï¿½ un infix valido
+                                                            // lastLastObj ï¿½ un atomo
+                                                            // curOp ï¿½ un atomo
                                                             //termStack.push(lastLastObj);
                                                             termStack.pop();  // estraggo lastlastobj
                                                             termStack.push(Atom.createAtom(lastLastOp.getName()));
@@ -925,9 +925,9 @@ final class PrologParser
                                                                     ((nState == STATE_ARG_LIST || nState == STATE_SQUARE_BRACKET) && lastOp.getName().equals(",")))
                                                             {
                                                                 // lastOp ha precedenza maggiore
-                                                                //curOp è atomo
-                                                                //lastlastOp è atomo
-                                                                //lastOp è operatore
+                                                                //curOp ï¿½ atomo
+                                                                //lastlastOp ï¿½ atomo
+                                                                //lastOp ï¿½ operatore
                                                                 termStack.pop();  // estraggo lastlastobj
                                                                 termStack.push(Atom.createAtom(lastLastOp.getName()));
                                                                 termStack.push(lastOp);
@@ -940,8 +940,8 @@ final class PrologParser
                                                             else
                                                             {
                                                                 // curOp ha precedenza maggiore
-                                                                //curOp è operator
-                                                                //lastOp è atom
+                                                                //curOp ï¿½ operator
+                                                                //lastOp ï¿½ atom
                                                                 Atom atom1 = Atom.createAtom(lastOp.getName());
                                                                 termStack.pop();
                                                                 termStack.push(atom1);
@@ -1071,7 +1071,7 @@ final class PrologParser
                 }
 
 //                System.out.println("obj2 " + obj2);
-                // controlla la precedenza e l'associatività
+                // controlla la precedenza e l'associativitï¿½
                 if ((termStack.size() == 0) ||
                         op.getName().equals(",") ||
                         op.getPrecedence() > ((Operator)obj2).getPrecedence() ||

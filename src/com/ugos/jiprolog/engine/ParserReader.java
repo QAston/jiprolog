@@ -24,7 +24,7 @@ import java.io.Reader;
 
 import com.ugos.io.PushbackLineNumberInputStream;
 
-class ParserReader extends Reader
+public class ParserReader extends Reader
 {
 //    private boolean m_bSkipLF;
 //    private int m_nLineNumber;

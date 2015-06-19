@@ -23,7 +23,7 @@ package com.ugos.jiprolog.engine;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-final class OperatorManager
+public final class OperatorManager
 {
     private final Hashtable m_opTable = new Hashtable(120);
 
