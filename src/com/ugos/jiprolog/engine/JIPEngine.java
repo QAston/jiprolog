@@ -1172,7 +1172,7 @@ public class JIPEngine implements Serializable
         return m_eventNotifier;
     }
 
-    final OperatorManager getOperatorManager()
+    public final OperatorManager getOperatorManager()
     {
         return m_opManager;
     }
