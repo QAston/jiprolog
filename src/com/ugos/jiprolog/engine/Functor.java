@@ -22,7 +22,7 @@ package com.ugos.jiprolog.engine;
 
 import java.util.Hashtable;
 
-class Functor extends ConsCell
+public class Functor extends ConsCell
 {
     final static long serialVersionUID = 300000005L;
 

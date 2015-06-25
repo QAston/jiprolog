@@ -25,7 +25,7 @@ import java.io.*;
 
 import com.ugos.io.PushbackLineNumberInputStream;
 
-class Clause extends ConsCell
+public class Clause extends ConsCell
 {
     final static long serialVersionUID = 300000002L;
 

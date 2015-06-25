@@ -23,6 +23,7 @@ package com.ugos.jiprolog.extensions.database;
 import com.ugos.jiprolog.engine.*;
 
 import java.util.*;
+import java.util.List;
 import java.io.*;
 import java.util.StringTokenizer;
 import java.sql.*;

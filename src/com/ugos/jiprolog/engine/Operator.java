@@ -21,7 +21,7 @@
 package com.ugos.jiprolog.engine;
 
 
-final class Operator
+public final class Operator
 {
     public int    m_nPrecedence;
     public String m_strAssoc;
@@ -40,7 +40,7 @@ final class Operator
         return m_suppOp;
     }
 
-    final Operator getInfix()
+    public final Operator getInfix()
     {
         if(isInfix())
             return this;
@@ -51,7 +51,7 @@ final class Operator
                 return null;
     }
 
-    final Operator getPrefix()
+    public final Operator getPrefix()
     {
         if(isPrefix())
             return this;
@@ -62,7 +62,7 @@ final class Operator
                 return null;
     }
 
-    final Operator getPostfix()
+    public final Operator getPostfix()
     {
         if(isPostfix())
             return this;
@@ -73,64 +73,64 @@ final class Operator
                 return null;
     }
 
-    final boolean isBinary()
+    public final boolean isBinary()
     {
         return isInfix();
     }
 
-    final boolean isUnary()
+    public final boolean isUnary()
     {
         return !isInfix();
     }
 
-    final int getArity()
+    public final int getArity()
     {
         if(isInfix())
             return 2;
         else
             return 1;
     }
-    final int getPrecedence()
+    public final int getPrecedence()
     {
         return m_nPrecedence;
     }
 
-    final String getAssoc()
+    public final String getAssoc()
     {
         return m_strAssoc;
     }
 
-    final String getName()
+    public final String getName()
     {
         return m_strName;
     }
 
-    final boolean isInfix()
+    public final boolean isInfix()
     {
         return m_strAssoc.equals("yfx") || m_strAssoc.equals("xfx") || m_strAssoc.equals("xfy") || m_strAssoc.equals("yfy");
     }
 
-    final boolean isPrefix()
+    public final boolean isPrefix()
     {
         return m_strAssoc.equals("fx") || m_strAssoc.equals("fy");
     }
 
-    final boolean isPostfix()
+    public final boolean isPostfix()
     {
         return m_strAssoc.equals("xf") || m_strAssoc.equals("yf");
     }
 
-    final boolean isRightAssoc()
+    public final boolean isRightAssoc()
     {
         return (m_strAssoc.charAt(m_strAssoc.length() - 1) == 'y');
     }
 
-    final boolean isLeftAssoc()
+    public final boolean isLeftAssoc()
     {
         return (m_strAssoc.charAt(0) == 'y');
     }
 
-    final boolean isNonAssoc()
+    public final boolean isNonAssoc()
     {
         return m_strAssoc.equals("xf") || m_strAssoc.equals("fx") || m_strAssoc.equals("xfx");
     }

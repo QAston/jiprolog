@@ -39,6 +39,7 @@ public final class Variable extends PrologObject//Serializable
 
     private String       m_strName;
     private PrologObject m_object;
+    private boolean m_unified = false;
 //    private long m_address;
 
 //    Variable parent;

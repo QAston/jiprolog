@@ -29,6 +29,8 @@ import com.ugos.jiprolog.engine.*;
 
 import java.util.*;
 import java.sql.*;
+import java.util.List;
+import java.util.List;
 
 public class JDBCClausesDatabase extends JIPClausesDatabase
 {
