@@ -23,7 +23,7 @@ package com.ugos.jiprolog.engine;
 //import java.io.Serializable;
 import java.util.Hashtable;
 
-final class PString extends List //implements Serializable
+public final class PString extends List //implements Serializable
 {
     final static long serialVersionUID = 300000007L;
 
